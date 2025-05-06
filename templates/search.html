@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="minecraft-container search-style">
+    <div class="mc-screen-title">Item Search</div>
+
+    <div class="minecraft-header">
+        <input type="text" id="searchInput" placeholder="Search items..." class="minecraft-search">
+        <div class="filter-button" id="filterButton">
+            <span class="current-filter">All Categories</span>
+            <div class="filter-options">
+                <div class="filter-option" data-value="">All Categories</div>
+                <div class="filter-option" data-value="blocks">Blocks</div>
+                <div class="filter-option" data-value="tools">Tools</div>
+                <div class="filter-option" data-value="armor">Armor</div>
+                <div class="filter-option" data-value="consumables">Consumables</div>
+                <div class="filter-option" data-value="potions">Potions</div>
+                <div class="filter-option" data-value="other">Other</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-list-header">
+             <div class="header-image-placeholder"></div>
+             <div class="header-details">
+                 <span class="header-name">Item Name</span>
+                 <span class="header-id">Item ID</span>
+                 <span class="header-numeric-id">Numeric ID</span>
+             </div>
+        </div>
+
+        <div class="search-list" id="searchResults">
+            <!-- Items werden hier dynamisch eingefügt -->
+        </div>
+    </div>
+
+    <template id="item-template">
+        <div class="search-item" data-item-id="{item_id}">
+            <div class="icon-minecraft icon-minecraft-{item_id}" alt="{name}"></div>
+            <div class="item-details">
+                <span class="item-name">{name}</span>
+                <span class="item-id">{id}</span>
+                <span class="numeric-id">{number}</span>
+            </div>
+        </div>
+    </template>
+</div>
+
+<nav class="mc-menu">
+    <a href="/" class="mc-button full" data-link>
+        <div class="title">Back to Main Menu</div>
+    </a>
+</nav>
+
+
+{% endblock %}

@@ -1,0 +1,9 @@
+User-Agent: *
+Disallow: /api
+Disallow: /cdn
+Disallow: /imprint
+Disallow: /impressum
+Disallow: /privacy-policy
+Disallow: /datenschutz
+Disallow: /admin
+Disallow: /login

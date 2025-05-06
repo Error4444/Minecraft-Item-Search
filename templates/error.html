@@ -1,0 +1,25 @@
+
+{% extends "base.html" %}
+
+{% block body_class %}home{% endblock %}
+
+{% block content %}
+<div class="logo">
+    <div class="logo-message">{{ error_code }} - {{ error_message }}</div>
+</div>
+
+<nav class="mc-menu">
+    <a href="/" class="mc-button full" data-link>
+        <div class="title">Back to home</div>
+    </a>
+    <div class="double">
+        <a href="/options" class="mc-button full" data-link>
+            <div class="title">Options</div>
+        </a>
+        <a href="/quit" class="mc-button full" data-link>
+            <div class="title">Quit Site</div>
+        </a>
+    </div>
+</nav>
+
+{% endblock %}

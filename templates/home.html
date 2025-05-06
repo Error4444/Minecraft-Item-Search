@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block body_class %}home{% endblock %}
+
+{% block content %}
+<div class="logo">
+    <div class="logo-message">Item Search!</div>
+</div>
+
+<nav class="mc-menu">
+    <a href="/search" class="mc-button full" data-link>
+        <div class="title">Search Items</div>
+    </a>
+    <a href="/random" class="mc-button full" data-link>
+        <div class="title">Random Item</div>
+    </a>
+    <a href="/data" class="mc-button full" data-link>
+        <div class="title">Raw Data</div>
+    </a>
+    <div class="double">
+        <a href="/options" class="mc-button full" data-link>
+            <div class="title">Sources</div>
+        </a>
+        <a href="/quit" class="mc-button full" data-link>
+            <div class="title">Quit Site</div>
+        </a>
+    </div>
+</nav>
+
+{% endblock %}
