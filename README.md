@@ -35,7 +35,7 @@ Um das Projekt lokal auszuführen oder weiterzuentwickeln, benötigen Sie folgen
 *   Python (Version 3.11.9 oder kompatibel)
 *   Einen ASGI-Server wie Uvicorn (um FastAPI-Anwendungen auszuführen)
 *   Eine laufende PostgreSQL-Datenbankinstanz
-*   Die in der `requirements.txt` (nicht direkt bereitgestellt, aber impliziert durch die verwendeten Bibliotheken in `website.py`) aufgeführten Python-Pakete. Die wichtigsten sind:
+*   Die in der `requirements.txt` aufgeführten Python-Pakete. Die wichtigsten sind:
     *   `fastapi`
     *   `uvicorn`
     *   `sqlalchemy`
@@ -60,7 +60,7 @@ Um das Projekt lokal auszuführen oder weiterzuentwickeln, benötigen Sie folgen
     source venv/bin/activate
     ```
 3.  **Abhängigkeiten installieren:**
-    (Erstellen Sie eine `requirements.txt`-Datei mit den notwendigen Paketen oder installieren Sie sie manuell)
+    (Nutzen Sie die `requirements.txt`-Datei mit den notwendigen Paketen oder installieren Sie sie manuell)
     ```bash
     pip install fastapi uvicorn sqlalchemy psycopg2-binary jinja2 python-dotenv
     ```
