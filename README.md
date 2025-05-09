@@ -19,7 +19,7 @@ Dieses Projekt ist eine Webanwendung, die es Benutzern ermöglicht, Minecraft-It
     *   Python
     *   FastAPI (Web-Framework)
     *   SQLAlchemy (ORM für Datenbankinteraktion)
-    *   PostgreSQL (Datenbank, basierend auf der Konfiguration in `website.py`)
+    *   MySQL oder PostgreSQL (Datenbank)
     *   Jinja2 (Template-Engine für HTML-Rendering)
 *   **Frontend:**
     *   HTML5
@@ -78,7 +78,3 @@ Um das Projekt lokal auszuführen oder weiterzuentwickeln, benötigen Sie folgen
 ## Ausführen der Anwendung
 
 Um den FastAPI-Entwicklungsserver zu starten (normalerweise mit Uvicorn):
-
-```bash
-uvicorn website:app --reload
-```
