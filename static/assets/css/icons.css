@@ -1,7 +1,7 @@
 .icon-minecraft, .icon-minecraft-sm {
 	display: inline-block;
 	vertical-align: middle;
-	background-image: url(icons.png);
+	background-image: url(../img/icons.png);
 	background-repeat: no-repeat;
 	background-position: 32px 32px;
 	

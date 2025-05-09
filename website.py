@@ -318,7 +318,7 @@ async def random_item(request: Request, db: Session = Depends(get_db)):
 @app.get("/data")
 async def show_data(request: Request, db: Session = Depends(get_db)):
     items = db.query(Item).all()
-    items_data = [item_to_dict(item) for item in items] # items_data ist eine Liste
+    items_data = [item_to_dict(item) for item in items]
     return templates.TemplateResponse("raw.html", {"request": request, "data": items_data})
 
 
