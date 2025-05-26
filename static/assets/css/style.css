@@ -252,7 +252,7 @@ body.home {
   align-items: center;
   background: #000;
   border: 2px solid #262626;
-  padding: 8px;
+  padding-right: 10px;
   cursor: pointer;
   transition: all 0.2s ease;
   height: auto;
@@ -376,7 +376,7 @@ body.home {
 }
 
 .search-item .icon-minecraft {
-  margin-right: 16px;
+  margin-right: 25px;
   flex-shrink: 0;
 }
 
@@ -481,187 +481,200 @@ body.home {
    Item Detail Page Styles
    ========================================================================== */
 
-.item-detail-header.search-item {
-  margin-bottom: 20px;
-  background: #333;
-  cursor: default;
-  border-color: #555;
-}
-
-.item-detail-header.search-item:hover {
-  background: #333;
-  border-color: #555;
-}
-
-.item-extended-details {
-  background: rgba(0, 0, 0, 0.5);
-  border: 2px solid #262626;
-  padding: 15px;
-  color: #ddd;
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
-}
-
-.item-extended-details dl {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 8px 15px;
-}
-
-.item-extended-details dt {
-  font-weight: bold;
-  color: #fff;
-  grid-column: 1;
-  padding-top: 2px;
-}
-
-.item-extended-details dd {
-  grid-column: 2;
-  margin: 0;
-  color: #bbb;
-}
-
-.numeric-id-detail {
-  color: #ffffa0;
-  font-weight: bold;
-}
-
+/* Generelle Styles für die Item-Detail-Seite */
 .minecraft-container.item-detail-style {
   padding: 20px;
   max-width: 1000px;
-  background: rgba(0, 0, 0, 0.6);
-  border: 2px solid #262626;
+  background: transparent;
+  margin: 20px auto;
+}
+
+.item-detail-style .mc-screen-title {
+  font-size: 24px;
+  color: #ffff55;
+  text-shadow: 3px 3px #3f3f00;
+  padding: 15px 0;
+  text-align: center;
   margin-bottom: 20px;
 }
 
-.item-display-area {
+/* Item-Container - verwende Flex statt Grid */
+.item-details-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 25px;
-  background: #333;
-  padding: 15px;
-  border: 2px solid #1a1a1a;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Flex-Layout für Item-Detailseite */
+.item-content-flex {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+/* Item-Bild Container links */
+.item-visual-container {
+  flex-shrink: 0;
+  margin-bottom: 0;
+  align-self: flex-start;
 }
 
 .item-visual {
-  flex: 0 0 160px;
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.detail-item-image {
-  width: 128px;
-  height: 128px;
-  image-rendering: crisp-edges;
-  border: 2px solid #555;
-  background: #000;
-  padding: 4px;
-  margin-bottom: 10px;
+.item-frame {
+  background: linear-gradient(45deg, #333 25%, #444 25%, #444 50%, #333 50%, #333 75%, #444 75%);
+  background-size: 20px 20px;
+  border: 3px solid #666;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Icon-Styling */
+.icon-minecraft {
+  transform: scale(2.5);
+  image-rendering: pixelated;
+  margin: 25px;
 }
 
 .item-visual-caption {
-  color: #fff;
-  font-size: 14px;
-  text-shadow: 2px 2px rgba(0, 0, 0, 0.8);
-  margin-top: 5px;
+  font-size: 16px;
+  color: #ffff99;
+  text-shadow: 2px 2px #3f3f00;
+  text-align: center;
+  margin-top: 10px;
 }
 
-.item-data {
-  flex: 1;
-  min-width: 250px;
-}
-
-.item-attributes {
+/* Attribute-Grid */
+.item-attributes-grid {
+  width: 100%;
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 10px 15px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+/* Styling für einzelne Attribut-Boxen */
+.attribute-box {
+  background: #000;
+  border: 2px solid #262626;
+  padding: 12px;
+  transition: all 0.2s ease;
+}
+
+.attribute-box:hover {
+  background: #1a1a1a;
+  border-color: #444;
+}
+
+.attribute-box-title {
+  color: #aaaaff;
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px #000;
+  border-bottom: 1px solid #444;
+  padding-bottom: 5px;
+}
+
+/* Beschreibungsbox über ganze Breite (für Grid) */
+.description-box {
+  grid-column: 1 / -1;
+}
+
+/* Beschreibungsbox neben dem Bild */
+.description-box-side {
+  flex: 1;
+  align-self: stretch;
+  overflow-y: auto;
+}
+
+.item-description-text {
   color: #ddd;
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
+  line-height: 1.6;
+  text-shadow: 1px 1px #000;
+  padding: 5px;
+}
+
+/* Attribute-Listen */
+.item-attributes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.attribute-group {
+  display: flex;
+  padding: 5px 0;
+  border-bottom: 1px dotted #444;
+}
+
+.attribute-group:last-child {
+  border-bottom: none;
 }
 
 .item-attributes dt {
-  font-weight: normal;
-  color: #fff;
-  text-align: right;
-  padding-top: 2px;
+  color: #aaaaff;
+  min-width: 140px;
+  text-shadow: 1px 1px #000;
 }
 
 .item-attributes dd {
-  margin: 0;
-  color: #bbb;
+  color: #fff;
+  flex: 1;
+  text-shadow: 1px 1px #000;
 }
 
+/* Farbakzente */
 .numeric-id-highlight {
-  color: #ffffa0;
-  font-weight: bold;
+  color: #ffff55;
 }
 
-.item-attributes dt.description-term {
-  grid-column: 1 / -1;
-  text-align: left;
-  color: #fff;
-  margin-top: 10px;
-  border-bottom: 1px solid #555;
-  padding-bottom: 3px;
-  margin-bottom: 5px;
+.positive {
+  color: #55ff55;
 }
 
-.item-attributes dd.description-data {
-  grid-column: 1 / -1;
-  color: #ddd;
-  line-height: 1.5;
+.negative {
+  color: #ff5555;
 }
 
-.item-content-wrapper {
-  display: flex;
-  gap: 20px;
-  background: rgba(0, 0, 0, 0.75);
-  border: 2px solid #262626;
-  padding: 15px;
-  margin-top: 15px;
+/* Navigation */
+.item-page-nav {
+  max-width: 600px;
+  margin: 30px auto;
 }
 
-.item-image-container {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Responsive Anpassungen */
+@media (max-width: 767px) {
+  .item-content-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .item-visual-container {
+    align-self: center;
+    margin-bottom: 20px;
+  }
+
+  .description-box-side {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .item-attributes-grid {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
 }
 
-.item-content-wrapper .item-image {
-  width: 96px;
-  height: 96px;
-  image-rendering: pixelated;
-  margin: 0;
-  border: 1px solid #555;
-}
-
-.item-info-container {
-  flex-grow: 1;
-}
-
-.item-info-container dl {
-  color: #fff;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.item-info-container dt {
-  color: #aaa;
-  font-size: 12px;
-  margin-top: 8px;
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.67);
-}
-
-.item-info-container dd {
-  margin-left: 10px;
-  text-shadow: 2px 2px rgba(0, 0, 0, 0.67);
-}
-
-.item-info-container .numeric-id-detail {
-  color: #ffffa0;
+/* Mittlere Bildschirmgrößen - 2 Spalten */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .item-attributes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ==========================================================================

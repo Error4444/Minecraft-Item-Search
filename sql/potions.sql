@@ -1,0 +1,67 @@
+create table potions
+(
+    numID        varchar(9)   null,
+    name         varchar(22)  null,
+    duration     varchar(5)   null,
+    textID       varchar(32)  null,
+    stackSize    int          null,
+    craftability tinyint(1)   null,
+    levelTwo     tinyint(1)   null,
+    throwability tinyint(1)   null,
+    description  varchar(128) null,
+    rarity       varchar(2)   null,
+    constraint potions_ibfk_1
+        foreign key (rarity) references rarity (rarityID)
+);
+
+create index rarity
+    on potions (rarity);
+
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373', 'Water Bottle', '', 'minecraft:potion', 16, 1, 0, 0, 'A simple bottle of water used for brewing.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16', 'Awkward Potion', '', 'minecraft:potion', 1, 1, 0, 0, 'Base potion used to brew more advanced potions.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:32', 'Thick Potion', '', 'minecraft:potion', 1, 1, 0, 0, 'Thick potion with no effects, used in brewing.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:64', 'Mundane Potion', '', 'minecraft:potion', 1, 1, 0, 0, 'Useless base potion with no effects.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8193', 'Regeneration Potion', '00:45', 'minecraft:potion', 1, 1, 0, 0, 'Regenerates health rapidly over a short period.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8194', 'Swiftness Potion', '03:00', 'minecraft:potion', 1, 1, 0, 0, 'Greatly boosts speed for a short duration.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8195', 'Fire Resistance Potion', '03:00', 'minecraft:potion', 1, 1, 0, 0, 'Grants immunity to fire and lava damage.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8196', 'Poison Potion', '00:45', 'minecraft:potion', 1, 1, 0, 0, 'Quickly poisons enemies down to 1 health.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8197', 'Healing Potion', '', 'minecraft:potion', 1, 1, 0, 0, 'Instantly restores a large amount of health.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8200', 'Weakness Potion', '01:30', 'minecraft:potion', 1, 1, 1, 0, 'Decreases enemy attack damage.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8201', 'Strength Potion', '03:00', 'minecraft:potion', 1, 1, 0, 0, 'Significantly increases melee damage.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8202', 'Slowness Potion', '01:30', 'minecraft:potion', 1, 1, 1, 0, 'Reduces movement speed.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8204', 'Harming Potion', '', 'minecraft:potion', 1, 1, 0, 0, 'Deals instant high damage to entities.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8225', 'Regeneration Potion', '00:22', 'minecraft:potion', 1, 1, 1, 0, 'Regenerates health rapidly over a short period.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8226', 'Swiftness Potion', '01:30', 'minecraft:potion', 1, 1, 1, 0, 'Greatly boosts speed for a short duration.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8228', 'Poison Potion', '00:22', 'minecraft:potion', 1, 1, 1, 0, 'Quickly poisons enemies down to 1 health.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8229', 'Healing Potion', '', 'minecraft:potion', 1, 1, 0, 0, 'Instantly restores a large amount of health.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8233', 'Strength Potion', '01:30', 'minecraft:potion', 1, 1, 1, 0, 'Significantly increases melee damage.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8236', 'Harming Potion', '', 'minecraft:potion', 1, 1, 0, 0, 'Deals instant high damage to entities.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8257', 'Regeneration Potion', '02:00', 'minecraft:potion', 1, 1, 0, 0, 'Regenerates health rapidly over a short period.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8258', 'Swiftness Potion', '08:00', 'minecraft:potion', 1, 1, 0, 0, 'Greatly boosts speed for a short duration.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8259', 'Fire Resistance Potion', '08:00', 'minecraft:potion', 1, 1, 0, 0, 'Grants immunity to fire and lava damage.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8260', 'Poison Potion', '02:00', 'minecraft:potion', 1, 1, 0, 0, 'Quickly poisons enemies down to 1 health.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8264', 'Weakness Potion', '04:00', 'minecraft:potion', 1, 1, 0, 0, 'Decreases enemy attack damage.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8265', 'Strength Potion', '08:00', 'minecraft:potion', 1, 1, 0, 0, 'Significantly increases melee damage.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:8266', 'Slowness Potion', '04:00', 'minecraft:potion', 1, 1, 0, 0, 'Reduces movement speed.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16378', 'Fire Resistance Splash', '02:15', 'minecraft:splash_potion', 1, 1, 0, 1, 'Grants immunity to fire and lava damage.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16385', 'Regeneration Splash', '00:33', 'minecraft:splash_potion', 1, 1, 0, 1, 'Regenerates health rapidly over a short period.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16386', 'Swiftness Splash', '02:15', 'minecraft:splash_potion', 1, 1, 0, 1, 'Greatly boosts speed for a short duration.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16388', 'Poison Splash', '00:33', 'minecraft:splash_potion', 1, 1, 0, 1, 'Quickly poisons enemies down to 1 health.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16389', 'Healing Splash', '', 'minecraft:splash_potion', 1, 1, 0, 1, 'Instantly restores a large amount of health.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16392', 'Weakness Splash', '01:07', 'minecraft:splash_potion', 1, 1, 0, 1, 'Decreases enemy attack damage.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16393', 'Strength Splash', '02:15', 'minecraft:splash_potion', 1, 1, 0, 1, 'Significantly increases melee damage.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16394', 'Slowness Splash', '01:07', 'minecraft:splash_potion', 1, 1, 0, 1, 'Reduces movement speed.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16396', 'Harming Splash', '', 'minecraft:splash_potion', 1, 1, 0, 1, 'Deals instant high damage to entities.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16418', 'Swiftness Splash', '01:07', 'minecraft:splash_potion', 1, 1, 0, 1, 'Greatly boosts speed for a short duration.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16420', 'Poison Splash', '00:16', 'minecraft:splash_potion', 1, 1, 0, 1, 'Quickly poisons enemies down to 1 health.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16421', 'Healing Splash', '', 'minecraft:splash_potion', 1, 1, 0, 1, 'Instantly restores a large amount of health.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16425', 'Strength Splash', '01:07', 'minecraft:splash_potion', 1, 1, 0, 1, 'Significantly increases melee damage.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16428', 'Harming Splash', '', 'minecraft:splash_potion', 1, 1, 0, 1, 'Deals instant high damage to entities.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16449', 'Regeneration Splash', '01:30', 'minecraft:splash_potion', 1, 1, 1, 1, 'Regenerates health rapidly over a short period.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16450', 'Swiftness Splash', '06:00', 'minecraft:splash_potion', 1, 1, 0, 1, 'Greatly boosts speed for a short duration.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16451', 'Fire Resistance Splash', '06:00', 'minecraft:splash_potion', 1, 1, 0, 1, 'Grants immunity to fire and lava damage.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16452', 'Poison Splash', '01:30', 'minecraft:splash_potion', 1, 1, 1, 1, 'Quickly poisons enemies down to 1 health.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16456', 'Weakness Splash', '03:00', 'minecraft:splash_potion', 1, 1, 0, 1, 'Decreases enemy attack damage.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16457', 'Strength Splash', '06:00', 'minecraft:splash_potion', 1, 1, 0, 1, 'Significantly increases melee damage.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16458', 'Slowness Splash', '03:00', 'minecraft:splash_potion', 1, 1, 0, 1, 'Reduces movement speed.', null);
+INSERT INTO minecraftalpha.potions (numID, name, duration, textID, stackSize, craftability, levelTwo, throwability, description, rarity) VALUES ('373:16471', 'Regeneration Splash', '00:16', 'minecraft:splash_potion', 1, 1, 0, 1, 'Regenerates health rapidly over a short period.', null);

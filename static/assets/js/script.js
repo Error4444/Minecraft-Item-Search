@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             updateCursorPosition();
         }
-
     }
 
     // Event-Listener für den Filterbutton
@@ -116,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
              return;
         }
 
-
         if (items.length === 0) {
             searchResults.innerHTML = '<div class="no-results">Keine Items gefunden</div>';
             return;
@@ -125,22 +123,27 @@ document.addEventListener('DOMContentLoaded', function() {
         // Rendern jedes Items
         items.forEach(item => {
             // Überprüfen, ob das Item-Objekt die erwarteten Eigenschaften hat
-            if (!item || typeof item.id !== 'string' || typeof item.name !== 'string') {
-                console.warn("Skipping invalid item:", item);
+            if (!item) {
+                console.warn("Skipping null item");
                 return;
             }
 
-            const itemElement = document.createElement('div');
+            // Bestimme die Werte für die Anzeige mit Fallbacks
+            const itemName = item.name || 'Unbekannt';
+            const itemId = item.id || item.textID || '';
+            const itemCssId = getItemCssId(item);
+            const itemNumber = item.number || item.numID || '';
+            const itemCategory = getCategoryName(item.category || '');
 
-            const itemCssId = item.item_id || item.id.replace('minecraft:', '').replace(/_/g, '-');
+            const itemElement = document.createElement('div');
 
             // Template-HTML mit Item-Daten füllen
             let itemHTML = itemTemplate.innerHTML
-                .replace(/{name}/g, item.name || 'Unbekannt')
-                .replace(/{category}/g, item.category || '')
-                .replace(/{id}/g, item.id)
-                .replace(/{item_id}/g, itemCssId || 'N/A')
-                .replace(/{number}/g, item.number || 'N/A')
+                .replace(/{name}/g, itemName)
+                .replace(/{category}/g, itemCategory)
+                .replace(/{id}/g, itemId)
+                .replace(/{item_id}/g, itemCssId)
+                .replace(/{number}/g, itemNumber);
 
             // HTML-Struktur aus dem Template erstellen
             itemElement.innerHTML = itemHTML;
@@ -148,9 +151,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const actualItemElement = itemElement.firstElementChild;
 
             if (actualItemElement) {
+                 // Bestimme die korrekte URL für die Detailseite
+                 const itemLink = getItemLink(item);
+
                  // Hinzufügen von Event-Listenern
                 actualItemElement.addEventListener('click', () => {
-                    window.location.href = `/item/${item.id}`;
+                    window.location.href = itemLink;
                 });
                 searchResults.appendChild(actualItemElement);
             } else {
@@ -159,7 +165,63 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Hilfsfunktion zur Ermittlung des CSS-freundlichen Item-IDs
+    function getItemCssId(item) {
+        // Versuche, einen CSS-freundlichen Bezeichner zu erstellen
+        if (item.item_id) {
+            return item.item_id;
+        }
+
+        let id = '';
+        if (item.id) {
+            id = item.id;
+        } else if (item.textID) {
+            id = item.textID;
+        }
+
+        // Extrahiere den Teil nach dem Doppelpunkt (falls vorhanden)
+        if (id && id.includes(':')) {
+            return id.split(':')[1].replace(/_/g, '-');
+        }
+
+        // Entferne minecraft: Präfix und ersetze Unterstriche durch Bindestriche
+        return id.replace('minecraft:', '').replace(/_/g, '-') || 'unknown';
+    }
+
+    // Hilfsfunktion zum Ermitteln des korrekten Links für die Detailseite
+    function getItemLink(item) {
+        // Bestimme den besten Wert für den Item-Link
+        if (item.id) {
+            return `/item/${item.id}`;
+        } else if (item.textID) {
+            return `/item/${item.textID}`;
+        } else if (item.numID) {
+            return `/item/${item.numID}`;
+        } else if (item.number) {
+            return `/item/${item.number}`;
+        }
+
+        // Fallback
+        return '/search';
+    }
+
+    // Hilfsfunktion zum Umwandeln der Kategorie in lesbare Form
+    function getCategoryName(category) {
+        if (!category) return '';
+
+        const categoryMap = {
+            'blocks': 'Block',
+            'items': 'Item',
+            'tools': 'Werkzeug',
+            'armor': 'Rüstung',
+            'consumables': 'Verbrauchsgegenstand',
+            'potions': 'Trank',
+            'other': 'Sonstiges'
+        };
+
+        return categoryMap[category] || category;
+    }
+
     // Führt beim Laden der Seite eine initiale Suche durch
     performSearch();
-
 });

@@ -7,17 +7,18 @@
 
     <div class="minecraft-header">
         <input type="text" id="searchInput" placeholder="Search items..." class="minecraft-search">
+        <span id="cursorBlinker" class="cursor-blinker"></span>
         <div class="filter-button" id="filterButton">
-            <span class="current-filter">All Categories</span>
+            <span class="current-filter">Alle Kategorien</span>
             <div class="filter-options">
-                <div class="filter-option" data-value="">All Categories</div>
-                <div class="filter-option" data-value="blocks">Blocks</div>
+                <div class="filter-option" data-value="">Alle Kategorien</div>
+                <div class="filter-option" data-value="blocks">Blöcke</div>
                 <div class="filter-option" data-value="items">Items</div>
-                <div class="filter-option" data-value="tools">Tools</div>
-                <div class="filter-option" data-value="armor">Armor</div>
-                <div class="filter-option" data-value="consumables">Consumables</div>
-                <div class="filter-option" data-value="potions">Potions</div>
-                <div class="filter-option" data-value="other">Other</div>
+                <div class="filter-option" data-value="tools">Werkzeuge</div>
+                <div class="filter-option" data-value="armor">Rüstung</div>
+                <div class="filter-option" data-value="consumables">Verbrauchsgegenstände</div>
+                <div class="filter-option" data-value="potions">Tränke</div>
+                <div class="filter-option" data-value="other">Sonstiges</div>
             </div>
         </div>
     </div>
@@ -28,7 +29,7 @@
              <div class="header-details">
                  <span class="header-name">Item Name</span>
                  <span class="header-id">Item ID</span>
-                 <span class="header-numeric-id">Numeric ID</span>
+                 <span class="header-numeric-id">Numerische ID</span>
              </div>
         </div>
 
@@ -51,9 +52,8 @@
 
 <nav class="mc-menu">
     <a href="/" class="mc-button full" data-link>
-        <div class="title">Back to Main Menu</div>
+        <div class="title">Zurück zum Hauptmenü</div>
     </a>
 </nav>
-
 
 {% endblock %}

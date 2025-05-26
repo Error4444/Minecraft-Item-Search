@@ -1,71 +1,254 @@
 {% extends "base.html" %}
 
-{% block body_class %}item-detail-page{% endblock %} {# Custom class for the body #}
+{% block body_class %}item-detail-page{% endblock %}
 
 {% block content %}
 
-<div class="minecraft-container item-detail-style"> {# Custom class for detail styling #}
-    <div class="mc-screen-title">{{ item.name | default('Item Details') }}</div>
+<div class="minecraft-container">
+    <div class="item-details-container">
+        <div class="mc-screen-title">{{ item.name | default('N/A') }}</div>
+        
+        <!-- Flex-Container für Bild (links) und Beschreibung (rechts) -->
+        <div class="item-content-flex">
+            <!-- Bild-Container links -->
+            <div class="item-visual-container">
+                <div class="item-visual">
+                    <div class="item-frame">
+                        <div class="icon-minecraft icon-minecraft-{{ item_id | default('placeholder') }}"
+                             alt="{{ item.name | default('Item Image') }}"></div>
+                    </div>
+                </div>
+            </div>
 
-    {# Main area for item display #}
-    <div class="item-display-area">
-
-        {# Container for the item image #}
-        <div class="item-visual">
-            <div class="icon-minecraft icon-minecraft-{{ item_id | default('placeholder') }}"
-                 alt="{{ item.name | default('Item Image') }}"></div>
-            <div class="item-visual-caption">{{ item.name | default('N/A') }}</div> {# Name below the image #}
+            <!-- Beschreibungsbox rechts daneben -->
+            {% if item.description %}
+            <div class="attribute-box description-box-side">
+                <div class="attribute-box-title">Beschreibung</div>
+                <p class="item-description-text">{{ item.description }}</p>
+            </div>
+            {% endif %}
         </div>
 
-        {# Container for the item information #}
-        <div class="item-data">
-            <dl class="item-attributes"> {# Definition list for details with custom class #}
-                {# Always visible core attributes #}
-                <dt>ID:</dt>
-                <dd>{{ item.id | default('N/A') }}</dd>
+        <!-- Dynamische Attribute-Boxen darunter -->
+        <div class="item-attributes-grid">
+                <!-- ID Box -->
+                {% if item.id is defined and item.id or item.textID is defined and item.textID %}
+                <div class="attribute-box">
+                    <div class="attribute-box-title">ID</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>ID:</dt>
+                            <dd>{{ item.id | default(item.textID) }}</dd>
+                        </div>
+                    </dl>
+                </div>
+                {% endif %}
 
-                <dt>Numeric ID:</dt>
-                <dd class="numeric-id-highlight">{{ item.number | default('N/A') }}</dd> {# Custom class for highlighting #}
+                <!-- Numerische ID Box -->
+                {% if item.number is defined and item.number or item.numID is defined and item.numID %}
+                <div class="attribute-box">
+                    <div class="attribute-box-title">Numerische ID</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>Wert:</dt>
+                            <dd class="numeric-id-highlight">{{ item.number | default(item.numID) }}</dd>
+                        </div>
+                    </dl>
+                </div>
+                {% endif %}
 
+                <!-- Kategorie Box -->
                 {% if item.category %}
-                <dt>Category:</dt>
-                <dd>{{ item.category | title }}</dd>
+                <div class="attribute-box">
+                    <div class="attribute-box-title">Kategorie</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>Typ:</dt>
+                            <dd>{{ item.category | replace('blocks', 'Block') | replace('items', 'Item') | replace('tools', 'Werkzeug') | replace('armor', 'Rüstung') | replace('consumables', 'Verbrauchsgegenstand') | replace('potions', 'Trank') | replace('other', 'Sonstiges') }}</dd>
+                        </div>
+                    </dl>
+                </div>
                 {% endif %}
 
-                {% if item.stack_size %}
-                <dt>Stack Size:</dt>
-                <dd>{{ item.stack_size }}</dd>
+                <!-- Stapelgröße Box -->
+                {% if item.stack_size is defined and item.stack_size is not none or item.stackSize is defined and item.stackSize is not none %}
+                <div class="attribute-box">
+                    <div class="attribute-box-title">Stapelgröße</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>Maximum:</dt>
+                            <dd>{{ item.stack_size | default(item.stackSize) }}</dd>
+                        </div>
+                    </dl>
+                </div>
                 {% endif %}
 
-                {% if item.craftable is not none %}
-                <dt>Craftable:</dt>
-                <dd>{{ 'Yes' if item.craftable else 'No' }}</dd>
+                <!-- Herstellbarkeit Box -->
+                {% if item.craftable is defined and item.craftable is not none or item.craftability is defined and item.craftability is not none %}
+                <div class="attribute-box">
+                    <div class="attribute-box-title">Herstellbarkeit</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>Herstellbar:</dt>
+                            <dd class="{% if item.craftable or item.craftability %}positive{% else %}negative{% endif %}">
+                                {{ 'Ja' if item.craftable or item.craftability else 'Nein' }}
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
                 {% endif %}
 
-                {# Optionally displayed attributes #}
-                {% if item.description %}
-                <dt class="description-term">Description:</dt> {# Custom class for layout #}
-                <dd class="description-data">{{ item.description }}</dd>
+                <!-- Erneuerbarkeit Box -->
+                {% if item.renewability is defined and item.renewability is not none or item.renewable is defined and item.renewable is not none %}
+                <div class="attribute-box">
+                    <div class="attribute-box-title">Erneuerbarkeit</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>Erneuerbar:</dt>
+                            <dd class="{% if item.renewability or item.renewable %}positive{% else %}negative{% endif %}">
+                                {{ 'Ja' if item.renewability or item.renewable else 'Nein' }}
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
                 {% endif %}
 
-                {# Insert more attributes here... e.g.
-                {% if item.tool_type %}
-                <dt>Tool Type:</dt>
-                <dd>{{ item.tool_type }}</dd>
+                <!-- Schaden Box (für Werkzeuge) -->
+                {% if item.damage is defined and item.damage is not none %}
+                <div class="attribute-box">
+                    <div class="attribute-box-title">Schaden</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>Wert:</dt>
+                            <dd>{{ item.damage }}</dd>
+                        </div>
+                    </dl>
+                </div>
                 {% endif %}
-                #}
-            </dl>
-        </div>
+
+                <!-- Haltbarkeit Box -->
+                {% if item.durability is defined and item.durability is not none %}
+                <div class="attribute-box">
+                    <div class="attribute-box-title">Haltbarkeit</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>Wert:</dt>
+                            <dd>{{ item.durability }}</dd>
+                        </div>
+                    </dl>
+                </div>
+                {% endif %}
+
+                <!-- Verzauberbarkeit Box -->
+                {% if item.enchantability is defined and item.enchantability is not none %}
+                <div class="attribute-box">
+                    <div class="attribute-box-title">Verzauberbarkeit</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>Verzauberbar:</dt>
+                            <dd class="{% if item.enchantability %}positive{% else %}negative{% endif %}">
+                                {{ 'Ja' if item.enchantability else 'Nein' }}
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+                {% endif %}
+
+                <!-- Brennstoff Box -->
+                {% if item.fuel is defined and item.fuel is not none %}
+                <div class="attribute-box">
+                    <div class="attribute-box-title">Brennstoff</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>Brennbar:</dt>
+                            <dd class="{% if item.fuel %}positive{% else %}negative{% endif %}">
+                                {{ 'Ja' if item.fuel else 'Nein' }}
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+                {% endif %}
+
+                <!-- Rüstungspunkte Box -->
+                {% if item.armor_points is defined and item.armor_points is not none %}
+                <div class="attribute-box">
+                    <div class="attribute-box-title">Rüstungspunkte</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>Wert:</dt>
+                            <dd>{{ item.armor_points }}</dd>
+                        </div>
+                    </dl>
+                </div>
+                {% endif %}
+
+                <!-- Trank-Dauer Box -->
+                {% if item.duration is defined and item.duration %}
+                <div class="attribute-box">
+                    <div class="attribute-box-title">Dauer</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>Zeit:</dt>
+                            <dd>{{ item.duration }}</dd>
+                        </div>
+                    </dl>
+                </div>
+                {% endif %}
+
+                <!-- Level II Box -->
+                {% if item.level_two is defined and item.level_two is not none %}
+                <div class="attribute-box">
+                    <div class="attribute-box-title">Level II</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>Verfügbar:</dt>
+                            <dd class="{% if item.level_two %}positive{% else %}negative{% endif %}">
+                                {{ 'Ja' if item.level_two else 'Nein' }}
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+                {% endif %}
+
+                <!-- Werfbarkeit Box -->
+                {% if item.throwability is defined and item.throwability is not none %}
+                <div class="attribute-box">
+                    <div class="attribute-box-title">Werfbarkeit</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>Werfbar:</dt>
+                            <dd class="{% if item.throwability %}positive{% else %}negative{% endif %}">
+                                {{ 'Ja' if item.throwability else 'Nein' }}
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+                {% endif %}
+
+                <!-- Tierfutter Box -->
+                {% if item.animal_fodder is defined and item.animal_fodder is not none %}
+                <div class="attribute-box">
+                    <div class="attribute-box-title">Tierfutter</div>
+                    <dl class="item-attributes">
+                        <div class="attribute-group">
+                            <dt>Tierfutter:</dt>
+                            <dd class="{% if item.animal_fodder %}positive{% else %}negative{% endif %}">
+                                {{ 'Ja' if item.animal_fodder else 'Nein' }}
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+                {% endif %}
+            </div>
     </div>
 </div>
 
-{# Navigation menu remains similar #}
 <nav class="mc-menu item-page-nav">
     <a href="/search" class="mc-button full" data-link>
-        <div class="title">Back to Search</div>
+        <div class="title">Zurück zur Suche</div>
     </a>
     <a href="/" class="mc-button full" data-link>
-        <div class="title">Back to Main Menu</div>
+        <div class="title">Zurück zum Hauptmenü</div>
     </a>
 </nav>
 
