@@ -101,6 +101,7 @@ class Item(Base):
         }
 
 
+
 class Block(Base):
     __tablename__ = "blocks"
 
@@ -109,15 +110,15 @@ class Block(Base):
     textID = Column(String(32))
     stackSize = Column(Integer)
     craftability = Column(Boolean)
-    tool = Column(String(3), ForeignKey("blocktools.toolID"))
+    # tool-Spalte entfernen oder als kompatibel markieren
     hardness = Column(Float)
     blastResistance = Column(Float)
-    transparent = Column(Boolean)
+    transparency = Column(Boolean)
     flammability = Column(Boolean)
     fuel = Column(Boolean)
     renewability = Column(Boolean)
     description = Column(String(128))
-    rarityID = Column(String(2), ForeignKey("rarity.rarityID"))
+    rarityID = Column(String(2))
 
     def to_dict(self):
         return {
@@ -126,10 +127,10 @@ class Block(Base):
             "id": self.textID,
             "stack_size": self.stackSize,
             "craftable": self.craftability,
-            "tool": self.tool,
+            # "tool": self.tool,  # Entfernen oder anpassen
             "hardness": self.hardness,
             "blast_resistance": self.blastResistance,
-            "transparent": self.transparent,
+            "transparent": self.transparency,
             "flammability": self.flammability,
             "fuel": self.fuel,
             "renewability": self.renewability,
@@ -137,7 +138,6 @@ class Block(Base):
             "rarity_id": self.rarityID,
             "category": "blocks"
         }
-
 
 class Tool(Base):
     __tablename__ = "tools"
@@ -514,6 +514,17 @@ async def home(request: Request):
     return templates.TemplateResponse("home.html", {"request": request})
 
 
+@app.get("/sources")
+async def sources(request: Request):
+    """Quellen der Anwendung"""
+    logger.debug(f"Route aufgerufen: /sources")
+    template = templates.get_template("sources.html")
+    content = template.render({"request": request})
+    if is_ajax_request(request):
+        return JSONResponse({"html": content})
+    return templates.TemplateResponse("sources.html", {"request": request})
+
+
 @app.get("/search")
 async def search_page(request: Request):
     """Suchseite der Anwendung"""
@@ -629,7 +640,7 @@ async def search_items(q: str = "", category: str = "", db: Session = Depends(ge
         return results
     except Exception as e:
         logger.error(f"Fehler bei der Suche: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Datenbankfehler: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
 
 
 @app.get("/item/{item_id}")
@@ -665,7 +676,7 @@ async def item_detail(request: Request, item_id: str, db: Session = Depends(get_
             logger.warning(f"Item nicht gefunden: {item_id}")
             return templates.TemplateResponse("error.html", {
                 "request": request,
-                "message": "Item nicht gefunden",
+                "message": "Item not found",
                 "status_code": 404
             }, status_code=404)
 
@@ -686,7 +697,7 @@ async def item_detail(request: Request, item_id: str, db: Session = Depends(get_
         logger.error(f"Fehler beim Abrufen des Items: {str(e)}")
         return templates.TemplateResponse("error.html", {
             "request": request,
-            "message": f"Fehler beim Abrufen des Items: {str(e)}",
+            "message": f"An issue accrued while fetching the items: {str(e)}",
             "status_code": 500
         }, status_code=500)
 
@@ -720,7 +731,7 @@ async def random_item(request: Request, db: Session = Depends(get_db)):
 
         if total_count == 0:
             logger.warning("Keine Items für Zufallsauswahl verfügbar")
-            raise HTTPException(status_code=404, detail="Keine Items verfügbar für Zufallsauswahl")
+            raise HTTPException(status_code=404, detail="No items are available for random selection")
 
         # Wähle einen zufälligen Index
         random_index = random.randint(0, total_count - 1)
@@ -754,7 +765,7 @@ async def random_item(request: Request, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Konnte kein zufälliges Item auswählen")
     except Exception as e:
         logger.error(f"Fehler bei der Zufallsauswahl: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Fehler bei der Zufallsauswahl: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Any issue acured in the random selection: {str(e)}")
 
 
 @app.get("/data")
@@ -841,7 +852,7 @@ async def search_items_api(
 
     except Exception as e:
         logger.error(f"Fehler bei der API-Suche: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Datenbankfehler: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
 
 
 # --- Weitere Routen ---

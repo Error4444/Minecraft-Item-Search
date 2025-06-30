@@ -210,13 +210,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!category) return '';
 
         const categoryMap = {
-            'blocks': 'Block',
-            'items': 'Item',
-            'tools': 'Werkzeug',
-            'armor': 'Rüstung',
-            'consumables': 'Verbrauchsgegenstand',
-            'potions': 'Trank',
-            'other': 'Sonstiges'
+            'blocks': 'Blocks',
+            'items': 'Items',
+            'tools': 'Tools',
+            'armor': 'Armor',
+            'consumables': 'Consumables',
+            'potions': 'Potions',
+            'other': 'Other'
         };
 
         return categoryMap[category] || category;

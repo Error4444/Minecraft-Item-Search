@@ -376,7 +376,7 @@ body.home {
 }
 
 .search-item .icon-minecraft {
-  margin-right: 25px;
+  margin-right: 30px;
   flex-shrink: 0;
 }
 
@@ -537,9 +537,9 @@ body.home {
 
 /* Icon-Styling */
 .icon-minecraft {
-  transform: scale(2.5);
+  transform: scale(2);
   image-rendering: pixelated;
-  margin: 25px;
+  margin: 20px;
 }
 
 .item-visual-caption {

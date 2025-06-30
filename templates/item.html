@@ -15,7 +15,7 @@
                 <div class="item-visual">
                     <div class="item-frame">
                         <div class="icon-minecraft icon-minecraft-{{ item_id | default('placeholder') }}"
-                             alt="{{ item.name | default('Item Image') }}"></div>
+                             alt="{{ item.name | default('Item Image') }}" style="transform: scale(3);"></div>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
             <!-- Beschreibungsbox rechts daneben -->
             {% if item.description %}
             <div class="attribute-box description-box-side">
-                <div class="attribute-box-title">Beschreibung</div>
+                <div class="attribute-box-title">Description</div>
                 <p class="item-description-text">{{ item.description }}</p>
             </div>
             {% endif %}
@@ -47,10 +47,10 @@
                 <!-- Numerische ID Box -->
                 {% if item.number is defined and item.number or item.numID is defined and item.numID %}
                 <div class="attribute-box">
-                    <div class="attribute-box-title">Numerische ID</div>
+                    <div class="attribute-box-title">Numeric ID</div>
                     <dl class="item-attributes">
                         <div class="attribute-group">
-                            <dt>Wert:</dt>
+                            <dt>Value:</dt>
                             <dd class="numeric-id-highlight">{{ item.number | default(item.numID) }}</dd>
                         </div>
                     </dl>
@@ -60,11 +60,11 @@
                 <!-- Kategorie Box -->
                 {% if item.category %}
                 <div class="attribute-box">
-                    <div class="attribute-box-title">Kategorie</div>
+                    <div class="attribute-box-title">Category</div>
                     <dl class="item-attributes">
                         <div class="attribute-group">
-                            <dt>Typ:</dt>
-                            <dd>{{ item.category | replace('blocks', 'Block') | replace('items', 'Item') | replace('tools', 'Werkzeug') | replace('armor', 'Rüstung') | replace('consumables', 'Verbrauchsgegenstand') | replace('potions', 'Trank') | replace('other', 'Sonstiges') }}</dd>
+                            <dt>Type:</dt>
+                            <dd>{{ item.category | replace('blocks', 'Block') | replace('items', 'Item') | replace('tools', 'Tool') | replace('armor', 'Rüstung') | replace('consumables', 'Consumable') | replace('potions', 'Potion') | replace('other', 'Other') }}</dd>
                         </div>
                     </dl>
                 </div>
@@ -73,7 +73,7 @@
                 <!-- Stapelgröße Box -->
                 {% if item.stack_size is defined and item.stack_size is not none or item.stackSize is defined and item.stackSize is not none %}
                 <div class="attribute-box">
-                    <div class="attribute-box-title">Stapelgröße</div>
+                    <div class="attribute-box-title">Stack size</div>
                     <dl class="item-attributes">
                         <div class="attribute-group">
                             <dt>Maximum:</dt>
@@ -86,12 +86,12 @@
                 <!-- Herstellbarkeit Box -->
                 {% if item.craftable is defined and item.craftable is not none or item.craftability is defined and item.craftability is not none %}
                 <div class="attribute-box">
-                    <div class="attribute-box-title">Herstellbarkeit</div>
+                    <div class="attribute-box-title">Craftability</div>
                     <dl class="item-attributes">
                         <div class="attribute-group">
-                            <dt>Herstellbar:</dt>
+                            <dt>Craftable:</dt>
                             <dd class="{% if item.craftable or item.craftability %}positive{% else %}negative{% endif %}">
-                                {{ 'Ja' if item.craftable or item.craftability else 'Nein' }}
+                                {{ 'Yes' if item.craftable or item.craftability else 'No' }}
                             </dd>
                         </div>
                     </dl>
@@ -101,12 +101,12 @@
                 <!-- Erneuerbarkeit Box -->
                 {% if item.renewability is defined and item.renewability is not none or item.renewable is defined and item.renewable is not none %}
                 <div class="attribute-box">
-                    <div class="attribute-box-title">Erneuerbarkeit</div>
+                    <div class="attribute-box-title">Renewability</div>
                     <dl class="item-attributes">
                         <div class="attribute-group">
-                            <dt>Erneuerbar:</dt>
+                            <dt>Renewable:</dt>
                             <dd class="{% if item.renewability or item.renewable %}positive{% else %}negative{% endif %}">
-                                {{ 'Ja' if item.renewability or item.renewable else 'Nein' }}
+                                {{ 'Yes' if item.renewability or item.renewable else 'No' }}
                             </dd>
                         </div>
                     </dl>
@@ -116,10 +116,10 @@
                 <!-- Schaden Box (für Werkzeuge) -->
                 {% if item.damage is defined and item.damage is not none %}
                 <div class="attribute-box">
-                    <div class="attribute-box-title">Schaden</div>
+                    <div class="attribute-box-title">Damage</div>
                     <dl class="item-attributes">
                         <div class="attribute-group">
-                            <dt>Wert:</dt>
+                            <dt>Value:</dt>
                             <dd>{{ item.damage }}</dd>
                         </div>
                     </dl>
@@ -129,10 +129,10 @@
                 <!-- Haltbarkeit Box -->
                 {% if item.durability is defined and item.durability is not none %}
                 <div class="attribute-box">
-                    <div class="attribute-box-title">Haltbarkeit</div>
+                    <div class="attribute-box-title">Durability</div>
                     <dl class="item-attributes">
                         <div class="attribute-group">
-                            <dt>Wert:</dt>
+                            <dt>Value:</dt>
                             <dd>{{ item.durability }}</dd>
                         </div>
                     </dl>
@@ -142,12 +142,12 @@
                 <!-- Verzauberbarkeit Box -->
                 {% if item.enchantability is defined and item.enchantability is not none %}
                 <div class="attribute-box">
-                    <div class="attribute-box-title">Verzauberbarkeit</div>
+                    <div class="attribute-box-title">Enchantability</div>
                     <dl class="item-attributes">
                         <div class="attribute-group">
-                            <dt>Verzauberbar:</dt>
+                            <dt>Enchantable:</dt>
                             <dd class="{% if item.enchantability %}positive{% else %}negative{% endif %}">
-                                {{ 'Ja' if item.enchantability else 'Nein' }}
+                                {{ 'Yes' if item.enchantability else 'No' }}
                             </dd>
                         </div>
                     </dl>
@@ -157,12 +157,12 @@
                 <!-- Brennstoff Box -->
                 {% if item.fuel is defined and item.fuel is not none %}
                 <div class="attribute-box">
-                    <div class="attribute-box-title">Brennstoff</div>
+                    <div class="attribute-box-title">Fuel</div>
                     <dl class="item-attributes">
                         <div class="attribute-group">
-                            <dt>Brennbar:</dt>
+                            <dt>Burnable:</dt>
                             <dd class="{% if item.fuel %}positive{% else %}negative{% endif %}">
-                                {{ 'Ja' if item.fuel else 'Nein' }}
+                                {{ 'Yes' if item.fuel else 'No' }}
                             </dd>
                         </div>
                     </dl>
@@ -172,10 +172,10 @@
                 <!-- Rüstungspunkte Box -->
                 {% if item.armor_points is defined and item.armor_points is not none %}
                 <div class="attribute-box">
-                    <div class="attribute-box-title">Rüstungspunkte</div>
+                    <div class="attribute-box-title">Armor Points</div>
                     <dl class="item-attributes">
                         <div class="attribute-group">
-                            <dt>Wert:</dt>
+                            <dt>Value:</dt>
                             <dd>{{ item.armor_points }}</dd>
                         </div>
                     </dl>
@@ -185,10 +185,10 @@
                 <!-- Trank-Dauer Box -->
                 {% if item.duration is defined and item.duration %}
                 <div class="attribute-box">
-                    <div class="attribute-box-title">Dauer</div>
+                    <div class="attribute-box-title">Duration</div>
                     <dl class="item-attributes">
                         <div class="attribute-group">
-                            <dt>Zeit:</dt>
+                            <dt>Time:</dt>
                             <dd>{{ item.duration }}</dd>
                         </div>
                     </dl>
@@ -201,9 +201,9 @@
                     <div class="attribute-box-title">Level II</div>
                     <dl class="item-attributes">
                         <div class="attribute-group">
-                            <dt>Verfügbar:</dt>
+                            <dt>Available:</dt>
                             <dd class="{% if item.level_two %}positive{% else %}negative{% endif %}">
-                                {{ 'Ja' if item.level_two else 'Nein' }}
+                                {{ 'Yes' if item.level_two else 'No' }}
                             </dd>
                         </div>
                     </dl>
@@ -213,12 +213,12 @@
                 <!-- Werfbarkeit Box -->
                 {% if item.throwability is defined and item.throwability is not none %}
                 <div class="attribute-box">
-                    <div class="attribute-box-title">Werfbarkeit</div>
+                    <div class="attribute-box-title">Throwability</div>
                     <dl class="item-attributes">
                         <div class="attribute-group">
-                            <dt>Werfbar:</dt>
+                            <dt>Throwable:</dt>
                             <dd class="{% if item.throwability %}positive{% else %}negative{% endif %}">
-                                {{ 'Ja' if item.throwability else 'Nein' }}
+                                {{ 'Yes' if item.throwability else 'No' }}
                             </dd>
                         </div>
                     </dl>
@@ -228,12 +228,12 @@
                 <!-- Tierfutter Box -->
                 {% if item.animal_fodder is defined and item.animal_fodder is not none %}
                 <div class="attribute-box">
-                    <div class="attribute-box-title">Tierfutter</div>
+                    <div class="attribute-box-title">Animal Feed</div>
                     <dl class="item-attributes">
                         <div class="attribute-group">
-                            <dt>Tierfutter:</dt>
+                            <dt>Feedable:</dt>
                             <dd class="{% if item.animal_fodder %}positive{% else %}negative{% endif %}">
-                                {{ 'Ja' if item.animal_fodder else 'Nein' }}
+                                {{ 'Yes' if item.animal_fodder else 'No' }}
                             </dd>
                         </div>
                     </dl>
@@ -245,10 +245,10 @@
 
 <nav class="mc-menu item-page-nav">
     <a href="/search" class="mc-button full" data-link>
-        <div class="title">Zurück zur Suche</div>
+        <div class="title">Back to Search</div>
     </a>
     <a href="/" class="mc-button full" data-link>
-        <div class="title">Zurück zum Hauptmenü</div>
+        <div class="title">Back to Home</div>
     </a>
 </nav>
 
