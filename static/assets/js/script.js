@@ -168,25 +168,31 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hilfsfunktion zur Ermittlung des CSS-freundlichen Item-IDs
     function getItemCssId(item) {
         // Versuche, einen CSS-freundlichen Bezeichner zu erstellen
+        let cssId = '';
+
         if (item.item_id) {
-            return item.item_id;
+            cssId = item.item_id;
+        } else {
+            let id = '';
+            if (item.id) {
+                id = item.id;
+            } else if (item.textID) {
+                id = item.textID;
+            }
+
+            // Extrahiere den Teil nach dem Doppelpunkt (falls vorhanden)
+            if (id && id.includes(':')) {
+                cssId = id.split(':')[1].replace(/_/g, '-');
+            } else {
+                // Entferne minecraft: Präfix und ersetze Unterstriche durch Bindestriche
+                cssId = id.replace('minecraft:', '').replace(/_/g, '-') || 'unknown';
+            }
         }
 
-        let id = '';
-        if (item.id) {
-            id = item.id;
-        } else if (item.textID) {
-            id = item.textID;
-        }
-
-        // Extrahiere den Teil nach dem Doppelpunkt (falls vorhanden)
-        if (id && id.includes(':')) {
-            return id.split(':')[1].replace(/_/g, '-');
-        }
-
-        // Entferne minecraft: Präfix und ersetze Unterstriche durch Bindestriche
-        return id.replace('minecraft:', '').replace(/_/g, '-') || 'unknown';
+        // Entferne alle geschweiften Klammern und deren Inhalt komplett
+        return cssId.replace(/\{[^}]*\}?/g, '');
     }
+
 
     // Hilfsfunktion zum Ermitteln des korrekten Links für die Detailseite
     function getItemLink(item) {
